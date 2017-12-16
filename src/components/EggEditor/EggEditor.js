@@ -83,7 +83,14 @@ const renderWeight = ({ input, meta: { touched, error } }) => (
   </div>
 );
 
-let EggEditor = ({ chickens, error, handleSubmit, history, submitting, match }) => {
+let EggEditor = ({
+  chickens,
+  error,
+  handleSubmit,
+  history,
+  submitting,
+  match,
+}) => {
   return (
     <div>
       {error &&
@@ -142,7 +149,9 @@ EggEditor = reduxForm({
   form: 'eggEditor',
   validate,
   onSubmit: (values, dispatch, props) => {
-    const chickenName = props.chickens && props.chickens[values.chickenId] ? props.chickens[values.chickenId].name : 'Unknown';
+    const chickenName = props.chickens && props.chickens[values.chickenId]
+      ? props.chickens[values.chickenId].name
+      : 'Unknown';
     const userId = props.uid;
     const modified = moment().toISOString();
     const newValues = Object.assign(values, { chickenName, userId, modified });
@@ -151,7 +160,12 @@ EggEditor = reduxForm({
   onSubmitSuccess: (result, dispatch, props) => props.history.goBack(),
 })(EggEditor);
 
-const mapStateToProps = ({ chickens, eggs, auth, dataLoading }, ownProps) => {
+const mapStateToProps = ({
+  chickens,
+  eggs,
+  auth,
+  dataLoading,
+}, ownProps) => {
   let initialValues = {
     date: moment().format('YYYY-MM-DD'),
   };

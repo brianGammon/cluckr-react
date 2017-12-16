@@ -97,8 +97,18 @@ class FlockManager extends Component {
   }
 
   render() {
-    const { newFlockForm, joinFlockForm, showModal, deleteCandidate } = this.state;
-    const { uid, flocks, currentFlockId, setCurrentFlock } = this.props;
+    const {
+      newFlockForm,
+      joinFlockForm,
+      showModal,
+      deleteCandidate,
+    } = this.state;
+    const {
+      uid,
+      flocks,
+      currentFlockId,
+      setCurrentFlock,
+    } = this.props;
     return (
       <div className="flock-manager">
         <div className="level is-mobile">

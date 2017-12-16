@@ -16,7 +16,12 @@ const ChickenListHeader = ({ numChickens, isFlockOwner }) => (
     {isFlockOwner &&
       <div className="level-right">
         <div className="level-item has-text-centered">
-          <Link className={`button is-small ${numChickens === 0 ? 'is-primary' : ''} ${numChickens > 0 ? 'is-outlined' : ''}`} to="/chicken/add">
+          <Link
+            className={`button is-small ${numChickens === 0
+              ? 'is-primary'
+              : ''} ${numChickens > 0 ? 'is-outlined' : ''}`}
+            to="/chicken/add"
+          >
             <span className="icon">
               <i className="fa fa-plus" aria-hidden="true" />
             </span>

@@ -7,6 +7,7 @@ const dateselector = (state, props) => props.match.params.date;
 const eggsByDateSelector = createSelector(
   [eggsList, dateselector],
   (eggs, date) => {
+    // eslint-disable-next-line no-console
     console.log('Running eggs for date selector');
     return _.reduce(eggs, (accumulator, value, key) => {
       if (value.date === date) {

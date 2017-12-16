@@ -4,7 +4,12 @@ import { Field } from 'redux-form';
 import UserBase from './UserBase';
 import FormField from '../Common/FormField';
 
-const ForgotPassword = ({ error, submitSucceeded, handleSubmit, submitting }) => {
+const ForgotPassword = ({
+  error,
+  submitSucceeded,
+  handleSubmit,
+  submitting,
+}) => {
   let errorMessage;
   if (error) {
     errorMessage = error.message ? error.message : 'Reset password failed, An error has occurred';

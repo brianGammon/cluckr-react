@@ -7,7 +7,7 @@ const isFlockOwnerSelector = createSelector(
   [currentFlockSelector, currentUserSelector],
   (flock, id) => {
     return flock ? flock.ownedBy === id : false;
-  }
+  },
 );
 
 export default isFlockOwnerSelector;

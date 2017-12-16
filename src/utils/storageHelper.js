@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import firebase from 'firebase';
 import { firebaseStorageRef } from '../config/constants';
 
@@ -7,7 +8,9 @@ export const uploadToStorage = (imageSet, userId, flockId) => {
     let mainImagePath = null;
 
     // Main image first
-    let uploadTask = firebaseStorageRef.child(`uploads/user:${userId}/flock:${flockId}/${imageSet.image.name}`).put(imageSet.image);
+    let uploadTask = firebaseStorageRef
+      .child(`uploads/user:${userId}/flock:${flockId}/${imageSet.image.name}`)
+      .put(imageSet.image);
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
@@ -21,7 +24,9 @@ export const uploadToStorage = (imageSet, userId, flockId) => {
       () => {
         mainImageUrl = uploadTask.snapshot.downloadURL;
         mainImagePath = uploadTask.snapshot.metadata.fullPath;
-        uploadTask = firebaseStorageRef.child(`uploads/user:${userId}/flock:${flockId}/${imageSet.thumbnail.name}`).put(imageSet.thumbnail);
+        uploadTask = firebaseStorageRef
+          .child(`uploads/user:${userId}/flock:${flockId}/${imageSet.thumbnail.name}`)
+          .put(imageSet.thumbnail);
         uploadTask.on(
           firebase.storage.TaskEvent.STATE_CHANGED,
           (snapshot) => {

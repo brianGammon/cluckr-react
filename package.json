@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "node ./scripts/pre-build.js && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "node_modules/eslint/bin/eslint.js src"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0"

@@ -91,12 +91,10 @@ class EggList extends Component {
   }
 
   handleNo() {
-    console.log('no');
     this.setState({ showModal: false });
   }
 
   handleYes() {
-    console.log('yes');
     this.setState({ showModal: false });
     this.props.deleteEgg(this.state.eggId);
   }

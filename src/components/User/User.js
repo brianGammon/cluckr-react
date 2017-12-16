@@ -21,7 +21,13 @@ class UserForm extends Component {
   }
 
   render() {
-    const { error, formMode, location, handleSubmit, submitting } = this.props;
+    const {
+      error,
+      formMode,
+      location,
+      handleSubmit,
+      submitting,
+    } = this.props;
     let errorMessage;
     if (error) {
       errorMessage = error.message ? error.message : 'Sign in failed, An error has occurred';
@@ -30,9 +36,21 @@ class UserForm extends Component {
       <UserBase showTabs location={location} errorMessage={errorMessage}>
         <form onSubmit={handleSubmit}>
           <Field component={FormField} name="email" type="text" label="Email" autoComplete="username" />
-          <Field component={FormField} name="password" type="password" label="Password" autoComplete={formMode === 'signup' ? 'new-password' : 'current-password'} />
+          <Field
+            component={FormField}
+            name="password"
+            type="password"
+            label="Password"
+            autoComplete={formMode === 'signup' ? 'new-password' : 'current-password'}
+          />
           {formMode === 'signup' &&
-            <Field component={FormField} name="confirmPassword" type="password" label="Confirm Password" autoComplete="new-password" />
+            <Field
+              component={FormField}
+              name="confirmPassword"
+              type="password"
+              label="Confirm Password"
+              autoComplete="new-password"
+            />
           }
 
           <button type="submit" className="button is-primary" disabled={submitting}>Submit</button>

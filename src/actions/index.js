@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { SubmissionError } from 'redux-form';
 import { deleteFromStorage } from '../utils/storageHelper';
 import { C, firebaseRef, firebaseAuth } from '../config/constants';

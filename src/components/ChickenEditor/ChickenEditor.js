@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/label-has-for */
+/* eslint-disable jsx-a11y/label-has-for, no-console */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
@@ -79,11 +79,15 @@ class ChickenEditor extends Component {
           photoValues.thumbnailPath = '';
         }
 
-        const newValues = Object.assign(values, { userId, modified, ...uploadResult, ...photoValues });
+        const newValues = Object.assign(values, {
+          userId,
+          modified,
+          ...uploadResult,
+          ...photoValues,
+        });
         return this.props.onSubmit(newValues);
       })
       .catch(error => console.log({ error }));
-
   }
 
   resetPreview() {
@@ -99,7 +103,14 @@ class ChickenEditor extends Component {
 
   render() {
     const errorMessage = 'Sample Error Message';
-    const { initialValues, error, history, match, handleSubmit, submitting } = this.props;
+    const {
+      initialValues,
+      error,
+      history,
+      match,
+      handleSubmit,
+      submitting,
+    } = this.props;
     const { newImageSet: { preview }, imagesToDelete } = this.state;
     const hasExistingImage = initialValues && initialValues.photoUrl;
     const removeExistingImage = imagesToDelete.length > 0;
@@ -127,15 +138,36 @@ class ChickenEditor extends Component {
           </div>
         </div>
 
-        <Field component={FormField} formclass="lg-field" autoFocus name="name" type="text" label="Name" maxLength="25" />
+        <Field
+          component={FormField}
+          formclass="lg-field"
+          autoFocus
+          name="name"
+          type="text"
+          label="Name"
+          maxLength="25"
+        />
 
-        <Field component={FormField} formclass="lg-field" name="breed" type="text" label="Breed" maxLength="25" showsuccess="false" />
+        <Field
+          component={FormField}
+          formclass="lg-field"
+          name="breed"
+          type="text"
+          label="Breed"
+          maxLength="25"
+          showsuccess="false"
+        />
 
-        <Field component={FormField} formclass="md-field" name="hatched" type="date" label="Hatched On" showsuccess="false" />
+        <Field
+          component={FormField}
+          formclass="md-field"
+          name="hatched"
+          type="date"
+          label="Hatched On"
+          showsuccess="false"
+        />
 
         <p className="label">Photo</p>
-
-        {/* <loading-spinner ngIf="loadingMessage" message="loadingMessage"></loading-spinner> */}
         <div className="level is-mobile">
           <div className="level-left photo-picker">
             <div className="level-item">
@@ -148,7 +180,13 @@ class ChickenEditor extends Component {
               <div>
                 <div className="file is-small photo-button">
                   <label className="file-label full-width">
-                    <input className="file-input" onChange={this.onFileChange} type="file" accept="image/*" name="photo" />
+                    <input
+                      className="file-input"
+                      onChange={this.onFileChange}
+                      type="file"
+                      accept="image/*"
+                      name="photo"
+                    />
                     <span className="file-cta full-width">
                       <span className="file-icon">
                         <i className="fa fa-camera" />
@@ -190,7 +228,14 @@ class ChickenEditor extends Component {
         </div>
 
         <button type="submit" className="button is-primary" disabled={submitting}>Save</button>
-        <button type="button" className="button cancel-button" onClick={() => history.goBack()} disabled={submitting}>Cancel</button>
+        <button
+          type="button"
+          className="button cancel-button"
+          onClick={() => history.goBack()}
+          disabled={submitting}
+        >
+          Cancel
+        </button>
       </form>
     );
   }
@@ -217,7 +262,12 @@ const wrappedChickenEditor = reduxForm({
   onSubmitSuccess: (result, dispatch, props) => props.history.goBack(),
 })(ChickenEditor);
 
-const mapStateToProps = ({ auth, chickens, dataLoading, userSettings }, ownProps) => {
+const mapStateToProps = ({
+  auth,
+  chickens,
+  dataLoading,
+  userSettings,
+}, ownProps) => {
   let initialValues = {};
   const state = {
     uid: auth.uid,

@@ -7,6 +7,7 @@ const chickenId = (state, props) => props.match.params.id;
 const eggsByChickenSelector = createSelector(
   [eggsList, chickenId],
   (eggs, id) => {
+    // eslint-disable-next-line no-console
     console.log('Running eggs for chicken selector');
     return _.reduce(eggs, (accumulator, value, key) => {
       if (value.chickenId === id) {

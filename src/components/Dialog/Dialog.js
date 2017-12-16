@@ -46,7 +46,13 @@ class Dialog extends Component {
   }
 
   render() {
-    const { showModal, danger, onNo, onYes, children } = this.props;
+    const {
+      showModal,
+      danger,
+      onNo,
+      onYes,
+      children,
+    } = this.props;
     return (
       <div className={`modal ${showModal ? 'is-active' : ''}`}>
         <div ref={(node) => { this.node = node; }} className="modal-background" />
