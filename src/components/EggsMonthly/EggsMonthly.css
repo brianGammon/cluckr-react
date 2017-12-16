@@ -1,0 +1,35 @@
+.dayz .day {
+  min-height: 100px;
+}
+
+.day .label {
+  font-weight: normal;
+  color: #3636366b;
+}
+
+.dayz.month .days .day .event {
+  background-color: rgb(30, 144, 255);
+  height: unset;
+}
+
+.dayz .x-labels {
+  text-align: center;
+}
+
+.dayz .x-labels .day-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 14.28571%;
+  padding-left: unset;
+}
+
+@media screen and (max-width: 768px) {
+  .dayz .event .evbody {
+    padding-left: 0.2rem;
+    font-size: xx-small;
+  }
+
+  .dayz .x-labels {
+    font-size: x-small;
+  }
+}

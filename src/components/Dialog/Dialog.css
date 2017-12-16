@@ -1,0 +1,22 @@
+.modal .modal-content {
+  width: auto;
+}
+
+.modal .controls {
+  margin-top: 10px;
+}
+
+.modal .controls .button {
+  width: 4rem;
+}
+
+.modal .controls .button:last-child {
+  margin-left: 5px;
+}
+
+.modal .notification {
+  /* TODO: Why do I need position: inherit ng4 version doesn't */
+  position: inherit;
+  padding-right: 1.5rem;
+  max-width: 500px;
+}

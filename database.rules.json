@@ -1,0 +1,74 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "userSettings": {
+      ".read": "auth != null",
+      ".write": false,
+      "$uid": {
+        ".validate": "newData.hasChildren(['displayName'])",
+        ".read": "auth.uid == $uid",
+        ".write": "auth.uid == $uid",
+        "currentFlockId": {
+          ".validate": "!newData.exists() || newData.parent().child('flocks').child(newData.val()).val() == true",
+          ".write": "!newData.exists() && auth != null"
+        },
+        "flocks": {
+          "$flockId": {
+            ".write": "!newData.exists() && root.child('flocks').child($flockId).child('ownedBy').val() == auth.uid"
+          }
+        }
+      }
+    },
+    "eggs": {
+      ".read": false,
+      ".write": false,
+      "$flockId": {
+        ".read": "root.child('userSettings').child(auth.uid).child('flocks').child($flockId).val() == true",
+        ".write": "root.child('userSettings').child(auth.uid).child('flocks').child($flockId).val() == true || (!newData.exists() && root.child('flocks').child($flockId).child('ownedBy').val() == auth.uid)",
+        ".indexOn": ["date", "chickenId"],
+        "$eggId": {
+          ".validate": "newData.hasChildren(['date', 'chickenId', 'userId', 'modified'])",
+          "notes": {
+          	".validate": "newData.val().length <= 250"
+        	}
+        }
+      }
+    },
+    "chickens": {
+      ".read": false,
+      ".write": false,
+      "$flockId": {
+        ".read": "root.child('userSettings').child(auth.uid).child('flocks').child($flockId).val() == true",
+        ".write": "root.child('flocks').child($flockId).child('ownedBy').val() == auth.uid",
+        "$chickenId": {
+          ".validate": "newData.hasChildren(['name'])",
+          "name": {
+          	".validate": "newData.val().length <= 25"
+        	},
+          "breed": {
+          	".validate": "newData.val().length <= 25"
+        	}
+        }
+      }
+    },
+    "flocks": {
+      ".read": "auth != null",
+      ".write": false,
+      "$flockId": {
+        ".validate": "newData.hasChildren(['name', 'ownedBy'])",
+        ".write": "(!data.exists() && newData.child('ownedBy').val() == auth.uid) || (newData.val() == null && data.child('ownedBy').val() == auth.uid)",
+        "name": {
+          ".validate": "newData.val().length <= 25"
+        }
+      }
+    },
+    "deletedFlocks": {
+      ".read": false,
+      ".write": false,
+      "$userId": {
+        ".write": "auth.uid == $userId"
+      }
+    }
+  }
+}

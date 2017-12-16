@@ -1,0 +1,98 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.pwa .notification {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+html.modal-open {
+  overflow: hidden;
+}
+
+.input {
+  margin-bottom: 5px;
+}
+
+.modal {
+  z-index: 999;
+}
+
+@media screen and (max-width: 768px) {
+  .cal-header {
+    font-size: xx-small;
+  }
+  .cal-month-view {
+    margin-left: -.5rem !important;
+    margin-right: -.5rem !important;
+  }
+}
+
+.cal-day-badge {
+  display: none !important;
+}
+
+.cal-month-view .cal-day-cell.cal-today .cal-day-number {
+  font-size: 1.2em !important;
+}
+
+.profile-image {
+  background-size:cover;
+  background-repeat: no-repeat;
+  width: 128px;
+  height: 128px;
+}
+
+.profile-image-sm {
+  background-size:cover;
+  background-repeat: no-repeat;
+  width: 96px;
+  height: 96px;
+}
+
+.media-content {
+  min-width: 0;
+}
+
+.is-clipped {
+  text-overflow: ellipsis;
+}
+
+.level-right .level-item:last-child {
+  margin-right: 0;
+}
+
+.level:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+.sm-field {
+  max-width: 110px;
+}
+
+.md-field {
+  max-width: 220px;
+}
+
+.lg-field {
+  max-width: 330px;
+}
+
+a[disabled] {
+  pointer-events: none;
+}
+
+.cancel-button {
+  margin-left: 10px;
+}
