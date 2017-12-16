@@ -72,7 +72,7 @@ class ChickenEditor extends Component {
 
         // wipe out existing photo metadata if user removed profile pic
         const photoValues = {};
-        if (deleteImages && !processNewImage) {
+        if (removeExistingImage && !processNewImage) {
           photoValues.photoUrl = '';
           photoValues.photoPath = '';
           photoValues.thumbnailUrl = '';
