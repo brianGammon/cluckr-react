@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
@@ -6,31 +6,56 @@ import moment from 'moment';
 import eggsByChickenSelector from '../../selectors/eggsByChickenSelector';
 import isFlockOwnerSelector from '../../selectors/isFlockOwnerSelector';
 import chickenStatsHelper from '../../utils/chickenStatsHelper';
+import ImageViewer from '../../components/Common/ImageViewer';
 import './ChickenProfile.css';
 
-const ChickenProfile = (props) => {
-  const chickenIds = Object.keys(props.chickens || {});
-  const currIndex = _.findIndex(
-    chickenIds,
-    chickenId => chickenId === props.match.params.id,
-  );
+class ChickenProfile extends Component {
+  constructor(props) {
+    super(props);
 
-  if (!props.chickens || !props.eggs) {
-    return null;
+    this.state = {
+      showModal: false,
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
-  const stats = chickenStatsHelper(props.eggs);
-  return (
-    <div>
-      <ProfileHeader chickenIds={chickenIds} index={currIndex} isFlockOwner={props.isFlockOwner} />
-      <ChickenInfo chicken={props.chickens[chickenIds[currIndex]]} />
-      <hr />
-      <ChickenStatsHeader chickenId={chickenIds[currIndex] || ''} />
-      <ChickenStats stats={stats} />
-      <EggWeekSnapshot snapshot={stats.lastSevenDays} />
-    </div>
-  );
-};
+  openModal() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    console.log('close');
+    this.setState({ showModal: false });
+  }
+
+  render() {
+    const { match, chickens, eggs, isFlockOwner } = this.props;
+    const chickenIds = Object.keys(chickens || {});
+    const currIndex = _.findIndex(
+      chickenIds,
+      chickenId => chickenId === match.params.id,
+    );
+
+    if (!chickens || !eggs) {
+      return null;
+    }
+
+    const stats = chickenStatsHelper(eggs);
+    return (
+      <div>
+        <ProfileHeader chickenIds={chickenIds} index={currIndex} isFlockOwner={isFlockOwner} />
+        <ChickenInfo chicken={chickens[chickenIds[currIndex]]} openModal={this.openModal} />
+        <hr />
+        <ChickenStatsHeader chickenId={chickenIds[currIndex] || ''} />
+        <ChickenStats stats={stats} />
+        <EggWeekSnapshot snapshot={stats.lastSevenDays} />
+        <ImageViewer showModal={this.state.showModal} onClose={this.handleCloseModal} imageUrl={chickens[chickenIds[currIndex]].photoUrl} />
+      </div>
+    );
+  }
+}
 
 const ProfileHeader = ({ chickenIds, index, isFlockOwner }) => (
   <div className="level is-mobile">
@@ -77,7 +102,7 @@ const ProfileHeader = ({ chickenIds, index, isFlockOwner }) => (
   </div>
 );
 
-const ChickenInfo = ({ chicken }) => {
+const ChickenInfo = ({ chicken, openModal }) => {
   const imgUrl = chicken.thumbnailUrl ? chicken.thumbnailUrl : '/assets/images/default-profile-photo_thumb.png';
   const profilePicStyle = { backgroundImage: `url(${imgUrl})` };
 
@@ -85,8 +110,10 @@ const ChickenInfo = ({ chicken }) => {
     <article className="media">
       <figure className="media-left">
         <div
+          role="button"
+          tabIndex="0"
           className="profile-image"
-          click="chicken.photoUrl ? imageViewer.open() : null"
+          onClick={chicken.photoUrl ? openModal : null}
           style={profilePicStyle}
         />
       </figure>

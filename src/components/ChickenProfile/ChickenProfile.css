@@ -14,3 +14,7 @@
 .week-snapshot .next-right {
   margin-left: 5px;
 }
+
+.profile-image {
+  cursor: pointer;
+}
