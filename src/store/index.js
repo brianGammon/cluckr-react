@@ -8,6 +8,7 @@ import flocks from '../reducers/flocksReducer';
 import auth from '../reducers/authReducer';
 import dbRefs from '../reducers/dbRefsReducer';
 import dataLoading from '../reducers/dataLoadingReducer';
+import appUpdate from '../reducers/appUpdateReducer';
 
 const initialState = undefined;
 
@@ -25,6 +26,7 @@ export default () => {
         auth,
         dbRefs,
         dataLoading,
+        appUpdate,
         form: formReducer,
       }), applyMiddleware(thunk),
       initialState,
@@ -39,6 +41,7 @@ export default () => {
         auth,
         dbRefs,
         dataLoading,
+        appUpdate,
         form: formReducer,
       }), applyMiddleware(thunk),
       initialState,

@@ -20,6 +20,7 @@ import Signup from '../../containers/SignupForm';
 import ForgotPassword from '../../containers/ForgotPasswordForm';
 import Loading from '../../components/Loading/Loading';
 import Splash from '../../components/Common/Splash';
+import UpdateAvailable from '../UpdateAvailable/UpdateAvailable';
 import { firebaseAuth, C } from '../../config/constants';
 import { startListening } from '../../actions';
 
@@ -68,6 +69,7 @@ class App extends Component {
               </main>
             </div>
           </div>
+          <UpdateAvailable />
         </div>
       </Router>
     );
