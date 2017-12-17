@@ -1,6 +1,5 @@
 import { C } from '../config/constants';
 
-// TODO: add email to this state
 const initialState = {
   authStatus: C.UNKNOWN,
 };
