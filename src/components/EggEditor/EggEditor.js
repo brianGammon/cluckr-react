@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import moment from 'moment';
 import { saveItem } from '../../actions';
+import { nowAsMoment, dateStringAsMoment } from '../../utils/dateHelper';
 import './EggEditor.css';
 
 const validate = (values) => {
   const errors = {};
   if (!values.date) {
     errors.date = 'Date laid is required';
+  } else if (dateStringAsMoment(values.date).isAfter(nowAsMoment())) {
+    errors.date = 'Date cannot be in the future';
   }
 
   if (!values.chickenId) {
@@ -167,7 +170,7 @@ const mapStateToProps = ({
   dataLoading,
 }, ownProps) => {
   let initialValues = {
-    date: moment().format('YYYY-MM-DD'),
+    date: nowAsMoment().format('YYYY-MM-DD'),
   };
   const state = {
     uid: auth.uid,

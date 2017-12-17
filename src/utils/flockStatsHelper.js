@@ -1,5 +1,5 @@
 import { sortBy, forEach } from 'lodash';
-import moment from 'moment';
+import { nowAsMoment, dateStringAsMoment } from '../utils/dateHelper';
 
 export default (eggs) => {
   let heaviestEgg = null;
@@ -45,15 +45,8 @@ export default (eggs) => {
     }
   });
 
-  const earliest = moment(earliestDate).utcOffset(0, true);
-  const now = moment()
-    .set({
-      hour: 0,
-      minute: 0,
-      second: 0,
-      millisecond: 0,
-    })
-    .utcOffset(0, true);
+  const earliest = dateStringAsMoment(earliestDate);
+  const now = nowAsMoment();
   const daysSinceFirst = now.diff(earliest, 'days') + 1;
   const averageNumber = daysSinceFirst > 0 ? sortedEggs.length / daysSinceFirst : 0;
 

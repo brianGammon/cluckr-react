@@ -57,10 +57,13 @@ export const fetchChickens = () => {
         const currentListener = dbRefs.chickens;
         const activeFlockId = userSettings.currentFlockId;
 
-        if (currentListener && !activeFlockId) {
+        if (!activeFlockId) {
           console.log('no active flock, remove state');
-          firebaseRef.child(currentListener).off();
-          dispatch({ type: C.REF_OFF, payload: 'chickens' });
+          if (currentListener) {
+            console.log('remove existing listener');
+            firebaseRef.child(currentListener).off();
+            dispatch({ type: C.REF_OFF, payload: 'chickens' });
+          }
           dispatch({ type: C.CHICKENS_RESET });
           return resolve();
         }
@@ -101,10 +104,13 @@ export const fetchEggs = () => {
         const currentListener = dbRefs.eggs;
         const activeFlockId = userSettings.currentFlockId;
 
-        if (currentListener && !activeFlockId) {
+        if (!activeFlockId) {
           console.log('no active flock, remove state');
-          firebaseRef.child(currentListener).off();
-          dispatch({ type: C.REF_OFF, payload: 'eggs' });
+          if (currentListener) {
+            console.log('remove existing listener');
+            firebaseRef.child(currentListener).off();
+            dispatch({ type: C.REF_OFF, payload: 'eggs' });
+          }
           dispatch({ type: C.EGGS_RESET });
           return resolve();
         }

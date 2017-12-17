@@ -26,12 +26,16 @@ class ChickenProfile extends Component {
   }
 
   handleCloseModal() {
-    console.log('close');
     this.setState({ showModal: false });
   }
 
   render() {
-    const { match, chickens, eggs, isFlockOwner } = this.props;
+    const {
+      match,
+      chickens,
+      eggs,
+      isFlockOwner,
+    } = this.props;
     const chickenIds = Object.keys(chickens || {});
     const currIndex = _.findIndex(
       chickenIds,
@@ -51,7 +55,11 @@ class ChickenProfile extends Component {
         <ChickenStatsHeader chickenId={chickenIds[currIndex] || ''} />
         <ChickenStats stats={stats} />
         <EggWeekSnapshot snapshot={stats.lastSevenDays} />
-        <ImageViewer showModal={this.state.showModal} onClose={this.handleCloseModal} imageUrl={chickens[chickenIds[currIndex]].photoUrl} />
+        <ImageViewer
+          showModal={this.state.showModal}
+          onClose={this.handleCloseModal}
+          imageUrl={chickens[chickenIds[currIndex]].photoUrl}
+        />
       </div>
     );
   }

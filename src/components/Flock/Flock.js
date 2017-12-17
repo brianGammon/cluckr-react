@@ -106,8 +106,13 @@ const FlockStats = ({ stats }) => {
 
 class Flock extends Component {
   componentDidMount() {
-    const { isLoading, numFlocks, history } = this.props;
-    if (!isLoading && numFlocks === 0) {
+    const {
+      isLoading,
+      numFlocks,
+      currentFlockId,
+      history,
+    } = this.props;
+    if (!isLoading && (numFlocks === 0 || !currentFlockId)) {
       history.push('/flock-manager');
     }
   }
@@ -152,6 +157,7 @@ const mapStateToProps = ({
 }) => ({
   numFlocks: flocks.length,
   isFlockOwner: isFlockOwnerSelector({ flocks, userSettings }),
+  currentFlockId: userSettings.currentFlockId,
   chickens,
   eggs,
   isLoading,
