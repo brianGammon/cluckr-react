@@ -54,7 +54,7 @@ export default (eggs) => {
       millisecond: 0,
     })
     .utcOffset(0, true);
-  const daysSinceFirst = now.diff(earliest, 'days');
+  const daysSinceFirst = now.diff(earliest, 'days') + 1;
   const averageNumber = daysSinceFirst > 0 ? sortedEggs.length / daysSinceFirst : 0;
 
   return {
