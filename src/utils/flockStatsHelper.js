@@ -7,7 +7,6 @@ export default (eggs) => {
   let totalWithWeight = 0;
   let totalWeight = 0;
   let earliestDate = null;
-  let daysSinceFirst = 0;
   const eggsPerChicken = {};
 
   const sortedEggs = sortBy(eggs, 'date');
@@ -46,15 +45,23 @@ export default (eggs) => {
     }
   });
 
-  const start = moment(earliestDate);
-  const now = moment();
-  daysSinceFirst = now.diff(start, 'days') + 1;
+  const earliest = moment(earliestDate).utcOffset(0, true);
+  const now = moment()
+    .set({
+      hour: 0,
+      minute: 0,
+      second: 0,
+      millisecond: 0,
+    })
+    .utcOffset(0, true);
+  const daysSinceFirst = now.diff(earliest, 'days');
+  const averageNumber = daysSinceFirst > 0 ? sortedEggs.length / daysSinceFirst : 0;
 
   return {
     total: sortedEggs.length,
     heaviest: heaviestEgg,
     averageWeight: totalWeight / totalWithWeight,
-    averageNumber: sortedEggs.length / daysSinceFirst,
+    averageNumber,
     firstEgg: earliestDate,
     mostEggs: topProducer,
   };

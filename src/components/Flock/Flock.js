@@ -91,7 +91,7 @@ const FlockStats = ({ stats }) => {
           </div>
         </div>
       }
-      {stats.averageNumber >= 0 &&
+      {stats.averageNumber > 0 &&
         <div className="level-item has-text-centered">
           <div>
             <p className="heading">Avg</p>
