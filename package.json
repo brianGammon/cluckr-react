@@ -1,6 +1,6 @@
 {
   "name": "cluckr-react",
-  "version": "2.0.0",
+  "version": "2.0.4",
   "private": true,
   "dependencies": {
     "bulma": "^0.6.1",
@@ -17,6 +17,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.2.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1"
@@ -25,7 +26,8 @@
     "start": "react-scripts start",
     "build": "node ./scripts/pre-build.js && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "node_modules/eslint/bin/eslint.js src"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0"

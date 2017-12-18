@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { dateStringAsMoment, nowAsMoment } from '../../utils/dateHelper';
 import EggsHeader from '../Common/EggsHeader';
 import eggsByDateSelector from '../../selectors/eggsByDateSelector';
 import EggList from './EggList';
 
 const DaySwitcher = ({ eggs, match }) => {
-  const currDate = moment.utc(match.params.date);
-  const previousDate = currDate.subtract(1, 'days').format('YYYY-MM-DD').toString();
-  const nextDate = currDate.add(2, 'days').format('YYYY-MM-DD').toString();
+  const currDate = dateStringAsMoment(match.params.date);
+  const previousDate = currDate.clone().subtract(1, 'days');
+  const nextDate = currDate.clone().add(1, 'days');
+  const isAfter = nextDate.isAfter(nowAsMoment());
 
   return (
     <div className="level is-mobile">
       <div className="level-item has-text-centered">
-        <Link className="button" to={`/eggs/day/${previousDate}`}>
+        <Link className="button" to={`/eggs/day/${previousDate.format('YYYY-MM-DD')}`}>
           <span className="icon is-small">
             <i className="fa fa-chevron-left" />
           </span>
@@ -27,7 +29,7 @@ const DaySwitcher = ({ eggs, match }) => {
       </div>
 
       <div className="level-item has-text-centered">
-        <Link className="button" to={`/eggs/day/${nextDate}`}>
+        <Link className="button" to={`/eggs/day/${nextDate.format('YYYY-MM-DD')}`} disabled={isAfter}>
           <span className="icon is-small">
             <i className="fa fa-chevron-right" />
           </span>
@@ -54,7 +56,9 @@ const DaySwitcher = ({ eggs, match }) => {
 
 class EggsDaily extends Component {
   componentWillMount() {
-    // this.props.fetchDeleted();
+    if (dateStringAsMoment(this.props.match.params.date).isAfter(nowAsMoment())) {
+      this.props.history.push(`/eggs/day/${nowAsMoment().format('YYYY-MM-DD')}`);
+    }
   }
 
   render() {

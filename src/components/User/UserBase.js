@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 import { appVersion } from '../../config/constants';
 import './User.css';
 
-const UserBase = ({ location, showTabs, errorMessage, children }) => {
+const UserBase = ({
+  location,
+  showTabs,
+  errorMessage,
+  children,
+}) => {
   const pathname = (location && location.pathname) || '';
 
   return (

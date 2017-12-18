@@ -20,7 +20,7 @@ import Signup from '../../containers/SignupForm';
 import ForgotPassword from '../../containers/ForgotPasswordForm';
 import Loading from '../../components/Loading/Loading';
 import Splash from '../../components/Common/Splash';
-import StateViewer from '../StateViewer/StateViewer';
+import UpdateAvailable from '../UpdateAvailable/UpdateAvailable';
 import { firebaseAuth, C } from '../../config/constants';
 import { startListening } from '../../actions';
 
@@ -65,11 +65,11 @@ class App extends Component {
                   <Route path="/login" render={props => <Login {...props} />} />
                   <Route path="/signup" render={props => <Signup {...props} />} />
                   <Route path="/reset-password" render={props => <ForgotPassword {...props} />} />
-                  <Route path="/state" render={props => <StateViewer {...props} />} />
                 </Switch>
               </main>
             </div>
           </div>
+          <UpdateAvailable />
         </div>
       </Router>
     );

@@ -53,12 +53,12 @@ const EggsMonthly = ({ eggs, match, history }) => {
   const currDate = moment.utc(match.params.date);
   const events = [];
   Object.keys(eggs || {}).forEach((id) => {
-    const eggDate = moment(eggs[id].date).clone();
+    const eggDate = moment.utc(eggs[id].date);
     const event = {
       content: eggs[id].chickenName,
       range: moment.range(
         eggDate,
-        eggDate.clone().add(1, 'day'),
+        eggDate.clone().add(1, 'hour'),
       ),
     };
     events.push(event);

@@ -1,4 +1,5 @@
 /* global File, FileReader, Image */
+/* eslint-disable no-console */
 import pica from 'pica/dist/pica.min';
 
 const resizeImage = (sourceCanvas, maxWidth, maxHeight, id) => {
@@ -83,6 +84,7 @@ export default (file, id) => {
       };
       image.src = reader.result;
     };
+    return reader.onload;
   });
   return promise;
 };

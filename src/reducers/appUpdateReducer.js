@@ -1,16 +1,18 @@
 import { C } from '../config/constants';
 
-const initialState = {};
+const initialState = {
+  available: false,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case C.USER_SETTINGS: {
-      return action.payload;
+    case C.UPDATE_AVAILABLE: {
+      return {
+        available: true,
+      };
     }
-    case C.LOGOUT: {
-      return initialState;
-    }
-    default:
+    default: {
       return state;
+    }
   }
 };

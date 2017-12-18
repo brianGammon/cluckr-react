@@ -120,7 +120,12 @@ class ChickenList extends Component {
           />))
         }
         <Dialog showModal={this.state.showModal} onYes={this.handleYes} onNo={this.handleNo}>
-          <p>Are you sure you want to delete <span className="has-text-weight-bold">{this.state.deleteCandidate.name}</span>?</p>
+          <p>
+            Are you sure you want to delete&nbsp;
+            <span className="has-text-weight-bold">
+              {this.state.deleteCandidate.name}
+            </span>?
+          </p>
         </Dialog>
       </div>
     );

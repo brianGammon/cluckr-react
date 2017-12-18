@@ -17,12 +17,11 @@ export const firebaseStorageRef = firebase.storage().ref();
 export const appVersion = '0.0.0';
 
 export const C = {
+  UPDATE_AVAILABLE: 'UPDATE_AVAILABLE',
+
   // Auth actions.
-  LOGIN_REQUEST: 'LOGIN_REQUEST',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILED: 'LOGIN_FAILED',
   LOGOUT: 'LOGOUT',
-  LISTENING_TO_AUTH: 'LISTENING_TO_AUTH',
 
   // Auth states.
   LOGGED_IN: 'LOGGED_IN',

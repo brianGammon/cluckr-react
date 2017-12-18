@@ -43,7 +43,7 @@ class Header extends Component {
     return (
       <nav className="header navbar is-fixed-top">
         <div className="navbar-brand">
-          <Link className="navbar-item logo" to="/state">
+          <Link className="navbar-item logo" to="/flock">
             <img src="/assets/images/cluckr_small.png" alt="cluckr" />
           </Link>
           <Link className="navbar-item" to="/flock">

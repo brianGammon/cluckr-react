@@ -1,48 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { reducer as formReducer } from 'redux-form';
-import userSettings from '../reducers/userSettingsReducer';
-import chickens from '../reducers/chickensReducer';
-import eggs from '../reducers/eggsReducer';
-import flocks from '../reducers/flocksReducer';
-import auth from '../reducers/authReducer';
-import dbRefs from '../reducers/dbRefsReducer';
-import dataLoading from '../reducers/dataLoadingReducer';
-
-const initialState = undefined;
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import rootReducer from '../reducers';
 
 export default () => {
-  let store;
+  const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-  // TODO: look at adding in dev tools middleware
-  if (module.hot) {
-    store = createStore(
-      combineReducers({
-        userSettings,
-        chickens,
-        eggs,
-        flocks,
-        auth,
-        dbRefs,
-        dataLoading,
-        form: formReducer,
-      }), applyMiddleware(thunk),
-      initialState,
-    );
-  } else {
-    store = createStore(
-      combineReducers({
-        userSettings,
-        chickens,
-        eggs,
-        flocks,
-        auth,
-        dbRefs,
-        dataLoading,
-        form: formReducer,
-      }), applyMiddleware(thunk),
-      initialState,
-    );
+  if (module.hot && process.env.NODE_ENV !== 'production') {
+    module.hot.accept('../reducers', () => {
+      // eslint-disable-next-line global-require
+      const nextRootReducer = require('../reducers').default;
+      store.replaceReducer(nextRootReducer);
+    });
   }
 
   return store;

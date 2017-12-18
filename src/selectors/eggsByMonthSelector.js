@@ -7,6 +7,7 @@ const monthSelector = (state, props) => props.match.params.date;
 const eggsByMonthSelector = createSelector(
   [eggsList, monthSelector],
   (eggs, date) => {
+    // eslint-disable-next-line no-console
     console.log('Running eggs for month selector');
     return _.reduce(eggs, (accumulator, value, key) => {
       if (value.date.startsWith(date)) {

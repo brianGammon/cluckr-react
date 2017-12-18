@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import { SubmissionError } from 'redux-form';
 import { deleteFromStorage } from '../utils/storageHelper';
 import { C, firebaseRef, firebaseAuth } from '../config/constants';
 
-const rmRefs = (dbRefs, dispatch) => {
+const removeDbRefs = (dbRefs, dispatch) => {
   return new Promise((resolve) => {
     Object.keys(dbRefs).forEach((key) => {
       firebaseRef.child(dbRefs[key]).off();
@@ -56,10 +57,13 @@ export const fetchChickens = () => {
         const currentListener = dbRefs.chickens;
         const activeFlockId = userSettings.currentFlockId;
 
-        if (currentListener && !activeFlockId) {
+        if (!activeFlockId) {
           console.log('no active flock, remove state');
-          firebaseRef.child(currentListener).off();
-          dispatch({ type: C.REF_OFF, payload: 'chickens' });
+          if (currentListener) {
+            console.log('remove existing listener');
+            firebaseRef.child(currentListener).off();
+            dispatch({ type: C.REF_OFF, payload: 'chickens' });
+          }
           dispatch({ type: C.CHICKENS_RESET });
           return resolve();
         }
@@ -100,10 +104,13 @@ export const fetchEggs = () => {
         const currentListener = dbRefs.eggs;
         const activeFlockId = userSettings.currentFlockId;
 
-        if (currentListener && !activeFlockId) {
+        if (!activeFlockId) {
           console.log('no active flock, remove state');
-          firebaseRef.child(currentListener).off();
-          dispatch({ type: C.REF_OFF, payload: 'eggs' });
+          if (currentListener) {
+            console.log('remove existing listener');
+            firebaseRef.child(currentListener).off();
+            dispatch({ type: C.REF_OFF, payload: 'eggs' });
+          }
           dispatch({ type: C.EGGS_RESET });
           return resolve();
         }
@@ -183,17 +190,10 @@ export const fetchUserSettings = () => {
   };
 };
 
-export const removeAllDbRefs = () => {
-  return (dispatch, getState) => {
-    const { dbRefs } = getState();
-    rmRefs(dbRefs, dispatch);
-  };
-};
-
 export const signOut = () => {
   return (dispatch, getState) => {
     const { dbRefs } = getState();
-    rmRefs(dbRefs, dispatch).then(() => {
+    removeDbRefs(dbRefs, dispatch).then(() => {
       firebaseAuth.signOut();
     });
   };
@@ -215,7 +215,6 @@ export const deleteItem = (type, id) => {
       .catch(error => console.log(error));
   };
 };
-
 
 export const deleteChicken = (chickenId) => {
   return (dispatch, getState) => {
@@ -253,10 +252,8 @@ export const deleteChicken = (chickenId) => {
 export const deleteFlock = (flockId) => {
   return (dispatch, getState) => {
     const { auth, dbRefs } = getState();
-    dispatch({ type: C.REF_OFF, payload: 'userSettings' });
-    firebaseRef.child(dbRefs.userSettings).off();
-
-    firebaseRef.child('userSettings').orderByChild(`flocks/${flockId}`).equalTo(true).once('value')
+    removeDbRefs(dbRefs, dispatch)
+      .then(() => firebaseRef.child('userSettings').orderByChild(`flocks/${flockId}`).equalTo(true).once('value'))
       .then((snapshot) => {
         const promises = [];
         snapshot.forEach((childSnapshot) => {

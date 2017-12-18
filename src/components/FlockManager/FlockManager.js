@@ -39,9 +39,9 @@ class FlockManager extends Component {
       this.joinFlockText.select();
       return this.setState(newState);
     }
-    if (/[^A-Za-z0-9]+/.test(value)) {
+    if (!/^[A-Za-z0-9_-]+$/.test(value)) {
       const newState = Object.assign({}, this.state);
-      newState.joinFlockForm.error = 'Only use letters and numbers.';
+      newState.joinFlockForm.error = 'Please enter a valid flock ID.';
       this.joinFlockText.select();
       return this.setState(newState);
     }
@@ -64,9 +64,9 @@ class FlockManager extends Component {
       this.newFlockText.select();
       return this.setState(newState);
     }
-    if (/[^A-Za-z0-9]+/.test(value)) {
+    if (!/^[A-Za-z0-9 _-]+$/.test(value)) {
       const newState = Object.assign({}, this.state);
-      newState.newFlockForm.error = 'Only use letters and numbers.';
+      newState.newFlockForm.error = 'Only use letters, numbers, spaces, underscores, or dashes.';
       this.newFlockText.select();
       return this.setState(newState);
     }
@@ -97,8 +97,18 @@ class FlockManager extends Component {
   }
 
   render() {
-    const { newFlockForm, joinFlockForm, showModal, deleteCandidate } = this.state;
-    const { uid, flocks, currentFlockId, setCurrentFlock } = this.props;
+    const {
+      newFlockForm,
+      joinFlockForm,
+      showModal,
+      deleteCandidate,
+    } = this.state;
+    const {
+      uid,
+      flocks,
+      currentFlockId,
+      setCurrentFlock,
+    } = this.props;
     return (
       <div className="flock-manager">
         <div className="level is-mobile">

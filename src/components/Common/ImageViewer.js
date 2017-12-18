@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import './Dialog.css';
 
-class Dialog extends Component {
+const styles = {
+  width: 'auto',
+};
+
+class ImageViewer extends Component {
   constructor(props) {
     super(props);
 
@@ -35,43 +38,29 @@ class Dialog extends Component {
 
   handleKeyDown(event) {
     if (event.key === 'Escape') {
-      this.props.onNo();
+      this.props.onClose();
     }
   }
 
   handleOutsideClick(event) {
     if (event.target === this.node) {
-      this.props.onNo();
+      this.props.onClose();
     }
   }
 
   render() {
-    const {
-      showModal,
-      danger,
-      onNo,
-      onYes,
-      children,
-    } = this.props;
+    const { showModal, imageUrl, onClose } = this.props;
     return (
       <div className={`modal ${showModal ? 'is-active' : ''}`}>
         <div ref={(node) => { this.node = node; }} className="modal-background" />
-        <div className="modal-content">
-          <div className="notification is-clearfix">
-            {children}
-            <div className="controls is-pulled-right">
-              <button className={`button ${danger ? 'is-danger is-outlined' : ''}`} onClick={onYes}>
-                Yes
-              </button>
-              <button className="button is-primary" onClick={onNo}>
-                No
-              </button>
-            </div>
-          </div>
+        <div className="modal-content" style={styles}>
+          <img className="image" src={imageUrl || '/assets/images/default-profile-photo.png'} alt="" />
         </div>
+        <button className="modal-close is-large" onClick={onClose} aria-label="close" />
       </div>
     );
   }
 }
 
-export default Dialog;
+export default ImageViewer;
+
