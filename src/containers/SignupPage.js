@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { signUp } from '../actions';
-import User from '../components/User/User';
+import User from '../components/User';
 
 const validate = (values) => {
   const errors = {};

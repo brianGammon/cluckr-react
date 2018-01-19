@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { appVersion } from '../../config/constants';
+import { appVersion } from '../config/constants';
 import './User.css';
 
 const UserBase = ({

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Field } from 'redux-form';
 import { Link } from 'react-router-dom';
-import { C } from '../../config/constants';
-import UserBase from '../../components/User/UserBase';
-import FormField from '../Common/FormField';
+import { C } from '../config/constants';
+import UserBase from './UserBase';
+import FormField from './FormField';
 
 class UserForm extends Component {
   componentWillReceiveProps(nextProps) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Field } from 'redux-form';
 import UserBase from './UserBase';
-import FormField from '../Common/FormField';
+import FormField from './FormField';
 
 const ForgotPassword = ({
   error,
@@ -23,7 +23,7 @@ const ForgotPassword = ({
           </div>
         }
         {submitSucceeded &&
-          <div ngIf="success" className="notification is-success">
+          <div className="notification is-success">
             <div>Please check your inbox for an email with instructions for resetting your password.</div>
             <Link to="/login">Return to Login</Link>
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Dialog from '../Dialog/Dialog';
+import Dialog from '../Dialog';
 import { updateUserSettings, deleteFlock, joinFlock, newFlock } from '../../actions';
 import './FlockManager.css';
 

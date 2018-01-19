@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import { dateStringAsMoment, nowAsMoment } from '../../utils/dateHelper';
-import EggsHeader from '../Common/EggsHeader';
-import eggsByDateSelector from '../../selectors/eggsByDateSelector';
-import EggList from './EggList';
+import { dateStringAsMoment, nowAsMoment } from '../utils/dateHelper';
 
 const DaySwitcher = ({ eggs, match }) => {
   const currDate = dateStringAsMoment(match.params.date);
@@ -54,29 +50,4 @@ const DaySwitcher = ({ eggs, match }) => {
   );
 };
 
-class EggsDaily extends Component {
-  componentWillMount() {
-    if (dateStringAsMoment(this.props.match.params.date).isAfter(nowAsMoment())) {
-      this.props.history.push(`/eggs/day/${nowAsMoment().format('YYYY-MM-DD')}`);
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <EggsHeader title="Eggs By Day" date={this.props.match.params.date} />
-        <DaySwitcher {...this.props} />
-        <hr />
-        <EggList eggs={this.props.eggs} deleteEgg={this.props.deleteEgg} />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state, props) => {
-  return {
-    eggs: eggsByDateSelector(state, props),
-  };
-};
-
-export default connect(mapStateToProps)(EggsDaily);
+export default DaySwitcher;

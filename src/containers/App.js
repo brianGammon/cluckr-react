@@ -6,25 +6,25 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import PrivateRoute from '../Common/PrivateRoute';
-import Header from '../Header/Header';
-import Flock from '../Flock/Flock';
-import FlockManager from '../FlockManager/FlockManager';
-import ChickenProfile from '../ChickenProfile/ChickenProfile';
-import ChickenEditor from '../ChickenEditor/ChickenEditor';
-import EggsDaily from '../EggsDaily/EggsDaily';
-import EggsMonthly from '../EggsMonthly/EggsMonthly';
-import EggEditor from '../EggEditor/EggEditor';
-import Login from '../../containers/LoginForm';
-import Signup from '../../containers/SignupForm';
-import ForgotPassword from '../../containers/ForgotPasswordForm';
-import Loading from '../../components/Loading/Loading';
-import Splash from '../../components/Common/Splash';
-import UpdateAvailable from '../UpdateAvailable/UpdateAvailable';
-import { firebaseAuth, C } from '../../config/constants';
-import { startListening } from '../../actions';
+import Splash from '../components/Splash';
+import { firebaseAuth, C } from '../config/constants';
+import { startListening } from '../actions';
+import PrivateRoute from '../components/PrivateRoute';
+import Header from '../components/Header/Header';
+import Flock from '../components/Flock/Flock';
+import FlockManager from '../components/FlockManager/FlockManager';
+import ChickenProfile from './ChickenProfilePage';
+import ChickenEditor from './ChickenEditorPage';
+import EggsDaily from '../containers/EggsDailyPage';
+import EggsMonthly from '../components/EggsMonthly/EggsMonthly';
+import EggEditor from './EggEditorPage';
+import Login from './LoginPage';
+import Signup from './SignupPage';
+import ForgotPassword from './ForgotPasswordPage';
+import Loading from '../containers/Loading';
+import UpdateAvailable from './UpdateAvailable';
 
-class App extends Component {
+class AppContainer extends Component {
   componentWillMount() {
     this.removeListener = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
@@ -84,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

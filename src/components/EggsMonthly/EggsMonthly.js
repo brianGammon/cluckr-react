@@ -5,7 +5,7 @@ import Dayz from 'dayz';
 import moment from 'moment';
 import 'dayz/dist/dayz.css';
 import './EggsMonthly.css';
-import EggsHeader from '../../components/Common/EggsHeader';
+import EggsHeader from '../../components/EggsHeader';
 import eggsByMonthSelector from '../../selectors/eggsByMonthSelector';
 
 const MonthSwitcher = ({ eggs, match }) => {

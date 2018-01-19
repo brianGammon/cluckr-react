@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { resetPassword } from '../actions';
-import ForgotPassword from '../components/User/ForgotPassword';
+import ForgotPassword from '../components/ForgotPassword';
 
 const validate = (values) => {
   const errors = {};
