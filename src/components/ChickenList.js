@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Dialog from '../Dialog';
-import { deleteChicken } from '../../actions';
+import Dialog from './Dialog';
+import { deleteChicken } from '../actions';
 
 const ProfileCard = ({
   chicken,

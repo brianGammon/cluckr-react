@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import moment from 'moment';
-import currentFlockSelector from '../../selectors/currentFlockSelector';
-import { signOut, updateUserSettings } from '../../actions';
-import { C, appVersion } from '../../config/constants';
-import './Header.css';
+import { C, appVersion } from '../config/constants';
 
-// TODO: Get app version from a constant written pre-build
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +31,6 @@ class Header extends Component {
     if (this.props.authStatus !== C.LOGGED_IN) {
       return null;
     }
-
     const dayString = moment().format('DD');
     const monthString = moment().format('YYYY-MM');
 
@@ -152,24 +146,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({
-  userSettings,
-  flocks,
-  auth: { authStatus },
-}) => (
-  {
-    currentFlock: currentFlockSelector({ flocks, userSettings }),
-    flocks,
-    userSettings,
-    authStatus,
-  }
-);
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signOutAction: () => dispatch(signOut()),
-    setCurrentFlock: flockId => dispatch(updateUserSettings({ currentFlockId: flockId })),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
