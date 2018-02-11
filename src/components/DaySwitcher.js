@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+import { eggType } from '../types';
 import { dateStringAsMoment, nowAsMoment } from '../utils/dateHelper';
 
 const DaySwitcher = ({ eggs, match }) => {
@@ -48,6 +50,15 @@ const DaySwitcher = ({ eggs, match }) => {
       </div>
     </div>
   );
+};
+
+DaySwitcher.propTypes = {
+  match: PropTypes.shape({}).isRequired,
+  eggs: PropTypes.objectOf(eggType),
+};
+
+DaySwitcher.defaultProps = {
+  eggs: null,
 };
 
 export default DaySwitcher;

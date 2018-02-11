@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
+import { chickenType } from '../types';
 import DateField from './DateField';
 import ChickenSelectField from './ChickenSelectField';
 import WeightField from './WeightField';
@@ -64,6 +66,19 @@ const EggEditor = ({
       </form>
     </div>
   );
+};
+
+EggEditor.propTypes = {
+  chickens: PropTypes.objectOf(chickenType),
+  error: PropTypes.shape({}),
+  match: PropTypes.shape({}).isRequired,
+  submitting: PropTypes.bool.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+};
+EggEditor.defaultProps = {
+  chickens: null,
+  error: null,
 };
 
 export default EggEditor;

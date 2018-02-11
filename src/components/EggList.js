@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { eggType } from '../types';
 import Dialog from './Dialog';
 import EggBox from './EggBox';
 
@@ -48,5 +50,14 @@ class EggList extends Component {
     );
   }
 }
+
+EggList.propTypes = {
+  eggs: PropTypes.objectOf(eggType),
+  deleteEgg: PropTypes.func.isRequired,
+};
+
+EggList.defaultProps = {
+  eggs: null,
+};
 
 export default EggList;

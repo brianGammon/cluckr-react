@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Dialog.css';
 
 class Dialog extends Component {
@@ -73,5 +74,17 @@ class Dialog extends Component {
     );
   }
 }
+
+Dialog.propTypes = {
+  showModal: PropTypes.bool.isRequired,
+  danger: PropTypes.bool,
+  onNo: PropTypes.func.isRequired,
+  onYes: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+Dialog.defaultProps = {
+  danger: false,
+};
 
 export default Dialog;

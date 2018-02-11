@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { eggType } from '../types';
 
 const EggBox = ({ egg, eggId, onDelete }) => (
   <div className="box is-radiusless">
@@ -72,5 +74,13 @@ const EggBox = ({ egg, eggId, onDelete }) => (
     </div>
   </div>
 );
+
+EggBox.propTypes = {
+  // https://github.com/yannickcr/eslint-plugin-react/issues/1389
+  // eslint-disable-next-line react/no-typos
+  egg: eggType.isRequired,
+  eggId: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default EggBox;

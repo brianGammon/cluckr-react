@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const DateField = ({ input, meta: { touched, error } }) => (
   <div className="field md-field">
@@ -13,5 +14,13 @@ const DateField = ({ input, meta: { touched, error } }) => (
     }
   </div>
 );
+
+DateField.propTypes = {
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({
+    touched: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+  }).isRequired,
+};
 
 export default DateField;
