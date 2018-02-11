@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { deleteChicken as deleteChickenAction } from '../actions';
 import ChickenList from '../components/ChickenList';
 import ChickenListHeader from '../components/ChickenListHeader';
 import FlockStats from '../components/FlockStats';
@@ -25,7 +26,12 @@ class FlockPage extends Component {
     if (this.props.isLoading) {
       return null;
     }
-    const { chickens, eggs, isFlockOwner } = this.props;
+    const {
+      chickens,
+      eggs,
+      isFlockOwner,
+      deleteChicken,
+    } = this.props;
     const numChickens = Object.keys(chickens || {}).length;
     const flockStats = flockStatsHelper(eggs);
 
@@ -46,6 +52,7 @@ class FlockPage extends Component {
           chickens={chickens}
           stats={flockStats}
           isFlockOwner={isFlockOwner}
+          deleteChicken={deleteChicken}
         />
       </div>
     );
@@ -67,4 +74,8 @@ const mapStateToProps = ({
   isLoading,
 });
 
-export default connect(mapStateToProps)(FlockPage);
+const mapDispatchToProps = dispatch => ({
+  deleteChicken: chickenId => dispatch(deleteChickenAction(chickenId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlockPage);

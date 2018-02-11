@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import React from 'react';
 import { Field } from 'redux-form';
+import PropTypes from 'prop-types';
 import FormField from '../components/FormField';
 
 const ChickenEditor = ({
@@ -140,6 +141,26 @@ const ChickenEditor = ({
       </button>
     </form>
   );
+};
+
+ChickenEditor.propTypes = {
+  error: PropTypes.shape({}),
+  match: PropTypes.shape({}).isRequired,
+  submitting: PropTypes.bool.isRequired,
+  history: PropTypes.shape({}).isRequired,
+  thumbnailUrl: PropTypes.string,
+  handleFormSubmit: PropTypes.func.isRequired,
+  previewDataUrl: PropTypes.string,
+  resetPreview: PropTypes.func.isRequired,
+  hasExistingImage: PropTypes.bool.isRequired,
+  isRemovingImage: PropTypes.bool.isRequired,
+  removeProfileImage: PropTypes.func.isRequired,
+  onFileChange: PropTypes.func.isRequired,
+};
+ChickenEditor.defaultProps = {
+  error: null,
+  thumbnailUrl: '',
+  previewDataUrl: null,
 };
 
 export default ChickenEditor;

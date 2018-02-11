@@ -113,7 +113,7 @@ class ChickenEditorPage extends Component {
         thumbnailUrl={initialValues ? initialValues.thumbnailUrl : ''}
         previewDataUrl={previewDataUrl}
         resetPreview={this.resetPreview}
-        hasExistingImage={hasExistingImage}
+        hasExistingImage={!!hasExistingImage}
         isRemovingImage={isRemovingImage}
         removeProfileImage={this.removeProfileImage}
         onFileChange={this.onFileChange}

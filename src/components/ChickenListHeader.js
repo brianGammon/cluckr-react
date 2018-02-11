@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const ChickenListHeader = ({ numChickens, isFlockOwner }) => (
@@ -27,5 +28,10 @@ const ChickenListHeader = ({ numChickens, isFlockOwner }) => (
     }
   </div>
 );
+
+ChickenListHeader.propTypes = {
+  numChickens: PropTypes.number.isRequired,
+  isFlockOwner: PropTypes.bool.isRequired,
+};
 
 export default ChickenListHeader;

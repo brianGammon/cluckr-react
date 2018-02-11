@@ -1,4 +1,5 @@
 import React from 'react';
+import { chickenStatsType } from '../types';
 
 const ChickenStats = ({ stats }) => {
   if (!stats || stats.total === 0) {
@@ -38,6 +39,10 @@ const ChickenStats = ({ stats }) => {
       </div>
     </div>
   );
+};
+
+ChickenStats.propTypes = {
+  stats: chickenStatsType.isRequired,
 };
 
 export default ChickenStats;

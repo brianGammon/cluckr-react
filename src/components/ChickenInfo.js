@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { chickenType } from '../types';
 
 const ChickenInfo = ({ chicken, openModal }) => {
   const imgUrl = chicken.thumbnailUrl ? chicken.thumbnailUrl : '/assets/images/default-profile-photo_thumb.png';
@@ -49,6 +51,11 @@ const ChickenInfo = ({ chicken, openModal }) => {
       </div>
     </article>
   );
+};
+
+ChickenInfo.propTypes = {
+  chicken: chickenType.isRequired,
+  openModal: PropTypes.func.isRequired,
 };
 
 export default ChickenInfo;

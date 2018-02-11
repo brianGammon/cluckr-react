@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const ChickenStatsHeader = ({ chickenId }) => (
   <div className="level is-mobile">
@@ -24,5 +25,9 @@ const ChickenStatsHeader = ({ chickenId }) => (
     </div>
   </div>
 );
+
+ChickenStatsHeader.propTypes = {
+  chickenId: PropTypes.string.isRequired,
+};
 
 export default ChickenStatsHeader;

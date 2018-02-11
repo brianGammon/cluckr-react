@@ -1,11 +1,15 @@
 import React from 'react';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import ProfileHeader from '../components/ProfileHeader';
 import EggWeekSnapshot from '../components/EggWeekSnapshot';
 import ChickenInfo from '../components/ChickenInfo';
 import ChickenStatsHeader from '../components/ChickenStatsHeader';
 import ChickenStats from '../components/ChickenStats';
 import ImageViewer from '../components/ImageViewer';
+
+import { chickenType } from '../types';
 
 const ChickenProfile = (props) => {
   const {
@@ -38,6 +42,21 @@ const ChickenProfile = (props) => {
       />
     </div>
   );
+};
+
+ChickenProfile.displayName = 'Chicken Profile';
+ChickenProfile.propTypes = {
+  match: PropTypes.shape({}).isRequired,
+  isFlockOwner: PropTypes.bool.isRequired,
+  stats: PropTypes.shape({}),
+  showModal: PropTypes.bool.isRequired,
+  openModal: PropTypes.func.isRequired,
+  handleCloseModal: PropTypes.func.isRequired,
+  chickens: PropTypes.objectOf(chickenType),
+};
+ChickenProfile.defaultProps = {
+  chickens: null,
+  stats: null,
 };
 
 export default ChickenProfile;

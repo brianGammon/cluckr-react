@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { chickenType } from '../types';
 
 const ChickenSelectField = ({ chickens, input, meta: { touched, error } }) => (
   <div className="field md-field">
@@ -21,5 +23,14 @@ const ChickenSelectField = ({ chickens, input, meta: { touched, error } }) => (
     }
   </div>
 );
+
+ChickenSelectField.propTypes = {
+  chickens: PropTypes.objectOf(chickenType).isRequired,
+  input: PropTypes.shape({}).isRequired,
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string,
+  }).isRequired,
+};
 
 export default ChickenSelectField;
