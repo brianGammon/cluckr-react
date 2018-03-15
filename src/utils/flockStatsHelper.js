@@ -1,5 +1,5 @@
 import { sortBy, forEach } from 'lodash';
-import { nowAsMoment, dateStringAsMoment } from '../utils/dateHelper';
+import moment from 'moment';
 
 export default (eggs) => {
   let heaviestEgg = null;
@@ -7,6 +7,8 @@ export default (eggs) => {
   let totalWithWeight = 0;
   let totalWeight = 0;
   let earliestDate = null;
+  let thirtyDayCount = 0;
+  const thirtyDaysAgo = moment().subtract(31, 'day');
   const eggsPerChicken = {};
 
   const sortedEggs = sortBy(eggs, 'date');
@@ -15,6 +17,8 @@ export default (eggs) => {
   }
 
   sortedEggs.forEach((egg) => {
+    const thisEgg = moment(egg.date);
+
     if (!earliestDate) {
       earliestDate = egg.date;
     }
@@ -33,6 +37,10 @@ export default (eggs) => {
         highestWeight = egg.weight;
       }
     }
+    // Build a running total for the past 30 days
+    if (thisEgg.isAfter(thirtyDaysAgo)) {
+      thirtyDayCount += 1;
+    }
   });
 
   // Figure out who laid the most eggs
@@ -45,10 +53,7 @@ export default (eggs) => {
     }
   });
 
-  const earliest = dateStringAsMoment(earliestDate);
-  const now = nowAsMoment();
-  const daysSinceFirst = now.diff(earliest, 'days') + 1;
-  const averageNumber = daysSinceFirst > 0 ? sortedEggs.length / daysSinceFirst : 0;
+  const averageNumber = thirtyDayCount > 0 ? thirtyDayCount / 30 : 0;
 
   return {
     total: sortedEggs.length,

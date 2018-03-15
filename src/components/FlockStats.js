@@ -41,7 +41,7 @@ const FlockStats = ({ stats }) => {
       {stats.averageNumber >= 0 &&
         <div className="level-item has-text-centered">
           <div>
-            <p className="heading">Avg</p>
+            <p className="heading">30 Day Avg</p>
             <p className="title is-4">{ Math.round(stats.averageNumber * 10) / 10 }</p>
             <p className="subtitle is-6">Per Day</p>
           </div>
