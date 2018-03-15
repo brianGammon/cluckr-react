@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'bulma/css/bulma.css';
 import { Provider } from 'react-redux';
-import createStore from './store';
+import 'bulma/css/bulma.css';
 import './index.css';
-import App from './components/App/App';
+
+import createStore from './store';
+import App from './containers/App';
 import { C } from './config/constants';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -19,9 +20,9 @@ ReactDOM.render(
 );
 
 if (module.hot && process.env.NODE_ENV !== 'production') {
-  module.hot.accept('./components/App/App', () => {
+  module.hot.accept('./containers/App', () => {
     // eslint-disable-next-line global-require
-    const NextApp = require('./components/App/App').default;
+    const NextApp = require('./containers/App').default;
     ReactDOM.render(
       <Provider store={store}>
         <NextApp />

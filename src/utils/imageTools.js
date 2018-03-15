@@ -40,7 +40,7 @@ export default (file, id) => {
         const reader = new FileReader();
         reader.readAsDataURL(thumbnailImage);
         reader.onload = () => {
-          imageSet.preview = reader.result;
+          imageSet.previewDataUrl = reader.result;
           console.log('Successfully processed imageSet');
           resolve(imageSet);
         };
