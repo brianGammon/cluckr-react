@@ -25,12 +25,16 @@ const ChickenSelectField = ({ chickens, input, meta: { touched, error } }) => (
 );
 
 ChickenSelectField.propTypes = {
-  chickens: PropTypes.objectOf(chickenType).isRequired,
+  chickens: PropTypes.objectOf(chickenType),
   input: PropTypes.shape({}).isRequired,
   meta: PropTypes.shape({
     touched: PropTypes.bool,
     error: PropTypes.string,
   }).isRequired,
 };
+
+ChickenSelectField.defaultProps = {
+  chickens: null,
+}
 
 export default ChickenSelectField;

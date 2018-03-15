@@ -81,11 +81,12 @@ ChickenList.propTypes = {
   chickens: PropTypes.objectOf(chickenType),
   // https://github.com/yannickcr/eslint-plugin-react/issues/1389
   // eslint-disable-next-line react/no-typos
-  stats: chickenStatsType.isRequired,
+  stats: chickenStatsType,
   isFlockOwner: PropTypes.bool.isRequired,
 };
 ChickenList.defaultProps = {
   chickens: null,
+  stats: null,
 };
 
 export default ChickenList;

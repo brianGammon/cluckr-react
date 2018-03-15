@@ -63,9 +63,13 @@ const ChickenCard = ({
 ChickenCard.propTypes = {
   chicken: chickenType.isRequired,
   chickenId: PropTypes.string.isRequired,
-  stats: chickenStatsType.isRequired,
+  stats: chickenStatsType,
   isFlockOwner: PropTypes.bool.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
+
+ChickenCard.defaultProps = {
+  stats: null,
+}
 
 export default ChickenCard;
