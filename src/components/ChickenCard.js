@@ -70,6 +70,6 @@ ChickenCard.propTypes = {
 
 ChickenCard.defaultProps = {
   stats: null,
-}
+};
 
 export default ChickenCard;

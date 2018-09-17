@@ -68,7 +68,7 @@ export const fetchChickens = () => {
           return resolve();
         }
 
-        const newListener = `chickens/${activeFlockId}`;
+        const newListener = `userData/${auth.uid}/chickens`;
         if (currentListener) {
           if (newListener === currentListener) {
             // Already listening on this flock, so bail
@@ -115,7 +115,7 @@ export const fetchEggs = () => {
           return resolve();
         }
 
-        const newListener = `eggs/${activeFlockId}`;
+        const newListener = `userData/${auth.uid}/eggs`;
         if (currentListener) {
           if (newListener === currentListener) {
             // Already listening on this flock, so bail

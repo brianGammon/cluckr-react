@@ -21,7 +21,7 @@ class EggsDaily extends Component {
         <EggsHeader title="Eggs By Day" date={this.props.match.params.date} />
         <DaySwitcher {...this.props} />
         <hr />
-        <EggList eggs={this.props.eggs} deleteEgg={this.props.deleteEgg} />
+        <EggList eggs={this.props.eggs} chickens={this.props.chickens} deleteEgg={this.props.deleteEgg} />
       </div>
     );
   }
@@ -30,6 +30,7 @@ class EggsDaily extends Component {
 const mapStateToProps = (state, props) => {
   return {
     eggs: eggsByDateSelector(state, props),
+    chickens: state.chickens,
   };
 };
 

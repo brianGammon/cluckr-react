@@ -8,7 +8,7 @@ import EggsHeader from '../components/EggsHeader';
 import eggsByMonthSelector from '../selectors/eggsByMonthSelector';
 import MonthSwitcher from '../components/MonthSwitcher';
 
-const EggsMonthly = ({ eggs, match, history }) => {
+const EggsMonthly = ({ eggs, chickens, match, history }) => {
   const handleClick = date => history.push(`/eggs/day/${date}`);
   const handleDayClick = (event, date) => handleClick(date.format('YYYY-MM-DD'));
   const handleEventClick = (event, layout) => handleClick(layout.attributes.range.start.format('YYYY-MM-DD'));
@@ -17,7 +17,7 @@ const EggsMonthly = ({ eggs, match, history }) => {
   Object.keys(eggs || {}).forEach((id) => {
     const eggDate = moment.utc(eggs[id].date);
     const event = {
-      content: eggs[id].chickenName,
+      content: (chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown',
       range: moment.range(
         eggDate,
         eggDate.clone().add(1, 'hour'),
@@ -44,6 +44,7 @@ const EggsMonthly = ({ eggs, match, history }) => {
 const mapStateToProps = (state, props) => {
   return ({
     eggs: eggsByMonthSelector(state, props),
+    chickens: state.chickens,
   });
 };
 

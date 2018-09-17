@@ -2,11 +2,37 @@
   "rules": {
     ".read": false,
     ".write": false,
+    "userData": {
+      ".read": false,
+      ".write": false,
+      "$uid": {
+        ".read": "auth.uid == $uid",
+        ".write": "auth.uid == $uid",
+        "eggs": {
+          "$eggId": {
+            ".validate": "newData.hasChildren(['date', 'chickenId', 'modified'])",
+            "notes": {
+              ".validate": "newData.val().length <= 250"
+            }
+          }
+        },
+        "chickens": {
+          "$chickenId": {
+            ".validate": "newData.hasChildren(['name'])",
+            "name": {
+              ".validate": "newData.val().length <= 25"
+            },
+            "breed": {
+              ".validate": "newData.val().length <= 25"
+            }
+          }
+        }
+      }
+    },
     "userSettings": {
       ".read": "auth != null",
       ".write": false,
       "$uid": {
-        ".validate": "newData.hasChildren(['displayName'])",
         ".read": "auth.uid == $uid",
         ".write": "auth.uid == $uid",
         "currentFlockId": {

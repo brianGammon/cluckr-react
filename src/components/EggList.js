@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { eggType } from '../types';
+import { eggType, chickenType } from '../types';
 import Dialog from './Dialog';
 import EggBox from './EggBox';
 
@@ -35,12 +35,12 @@ class EggList extends Component {
   }
 
   render() {
-    const { eggs } = this.props;
+    const { eggs, chickens } = this.props;
     const eggIds = Object.keys(eggs || {});
     return (
       <div className="egg-list">
         {eggIds.map(id => (
-          <EggBox key={id} egg={eggs[id]} eggId={id} onDelete={() => this.showModal(id)} />
+          <EggBox key={id} egg={eggs[id]} eggId={id} chickenName={(chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown'} onDelete={() => this.showModal(id)} />
         ))
         }
         <Dialog showModal={this.state.showModal} onYes={this.handleYes} onNo={this.handleNo}>
@@ -53,11 +53,13 @@ class EggList extends Component {
 
 EggList.propTypes = {
   eggs: PropTypes.objectOf(eggType),
+  chickens: PropTypes.objectOf(chickenType),
   deleteEgg: PropTypes.func.isRequired,
 };
 
 EggList.defaultProps = {
   eggs: null,
+  chickens: null,
 };
 
 export default EggList;
