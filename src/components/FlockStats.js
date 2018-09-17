@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FlockStats = ({ stats }) => {
+const FlockStats = ({ stats, chickens }) => {
   if (!stats) {
     return (
       <div className="level is-mobile">
@@ -25,7 +25,7 @@ const FlockStats = ({ stats }) => {
           <div>
             <p className="heading">Heaviest</p>
             <p className="title is-4">{ stats.heaviest.weight }g</p>
-            <p className="subtitle is-6">{ stats.heaviest.chickenName }</p>
+            <p className="subtitle is-6">{ (chickens[stats.heaviest.chickenId] && chickens[stats.heaviest.chickenId].name) || 'Unknown' }</p>
           </div>
         </div>
       }

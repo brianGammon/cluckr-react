@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { eggType } from '../types';
 
-const EggBox = ({ egg, eggId, onDelete }) => (
+const EggBox = ({ egg, eggId, chickenName, onDelete }) => (
   <div className="box is-radiusless">
     <div className="media">
       <div className="media-left">
@@ -19,11 +19,11 @@ const EggBox = ({ egg, eggId, onDelete }) => (
                 className="is-size-6"
                 to={`/chicken/${egg.chickenId}`}
               >
-                { egg.chickenName }
+                { chickenName }
               </Link>
             }
             {egg.chickenId === 'unknown' &&
-              <p className="is-size-6">{ egg.chickenName }</p>
+              <p className="is-size-6">{ chickenName }</p>
             }
             <p className={`is-size-6 ${egg.weight ? '' : 'has-text-grey-light'}`}>
               { egg.weight ? egg.weight : '-- ' }g

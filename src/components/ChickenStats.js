@@ -42,7 +42,11 @@ const ChickenStats = ({ stats }) => {
 };
 
 ChickenStats.propTypes = {
-  stats: chickenStatsType.isRequired,
+  stats: chickenStatsType,
+};
+
+ChickenStats.defaultProps = {
+  stats: null,
 };
 
 export default ChickenStats;

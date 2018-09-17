@@ -45,7 +45,7 @@ class FlockPage extends Component {
           </div>
         </div>
         <FlockStatsHeader numChickens={numChickens} />
-        <FlockStats stats={flockStats} />
+        <FlockStats stats={flockStats} chickens={chickens} />
         <hr />
         <ChickenListHeader numChickens={numChickens} isFlockOwner={isFlockOwner} />
         <ChickenList

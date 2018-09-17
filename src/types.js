@@ -15,11 +15,9 @@ export const chickenType = PropTypes.shape({
 
 export const eggType = PropTypes.shape({
   chickenId: PropTypes.string.isRequired,
-  chickenName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   modified: PropTypes.string,
-  userId: PropTypes.string,
-  weight: PropTypes.string,
+  weight: PropTypes.string || PropTypes.number,
   notes: PropTypes.string,
   damaged: PropTypes.bool,
 });
