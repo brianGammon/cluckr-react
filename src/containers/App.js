@@ -12,7 +12,6 @@ import { startListening } from '../actions';
 import PrivateRoute from '../components/PrivateRoute';
 import Header from '../containers/HeaderContainer';
 import Flock from '../containers/FlockPage';
-import FlockManager from '../containers/FlockManagerPage';
 import ChickenProfile from './ChickenProfilePage';
 import ChickenEditor from './ChickenEditorPage';
 import EggsDaily from '../containers/EggsDailyPage';
@@ -53,7 +52,6 @@ class AppContainer extends Component {
                   <Route exact path="/">
                     <Redirect to="/flock" />
                   </Route>
-                  <PrivateRoute path="/flock-manager" component={FlockManager} authed={authed} />
                   <PrivateRoute path="/flock" component={Flock} authed={authed} />
                   <PrivateRoute path="/chicken/add" component={ChickenEditor} authed={authed} />
                   <PrivateRoute path="/chicken/edit/:id" component={ChickenEditor} authed={authed} />

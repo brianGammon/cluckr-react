@@ -15,7 +15,6 @@ const ChickenProfile = (props) => {
   const {
     match,
     chickens,
-    isFlockOwner,
     stats,
     showModal,
     openModal,
@@ -29,7 +28,7 @@ const ChickenProfile = (props) => {
 
   return (
     <div>
-      <ProfileHeader chickenIds={chickenIds} index={currIndex} isFlockOwner={isFlockOwner} />
+      <ProfileHeader chickenIds={chickenIds} index={currIndex} />
       <ChickenInfo chicken={chickens[chickenIds[currIndex]]} openModal={openModal} />
       <hr />
       <ChickenStatsHeader chickenId={chickenIds[currIndex] || ''} />
@@ -47,7 +46,6 @@ const ChickenProfile = (props) => {
 ChickenProfile.displayName = 'Chicken Profile';
 ChickenProfile.propTypes = {
   match: PropTypes.shape({}).isRequired,
-  isFlockOwner: PropTypes.bool.isRequired,
   stats: PropTypes.shape({}),
   showModal: PropTypes.bool.isRequired,
   openModal: PropTypes.func.isRequired,

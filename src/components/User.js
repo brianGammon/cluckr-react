@@ -7,6 +7,7 @@ import FormField from './FormField';
 
 class UserForm extends Component {
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
     if (nextProps.auth.authStatus === C.LOGGED_IN) {
       // logged in, let's show redirect if any, or show home
       try {

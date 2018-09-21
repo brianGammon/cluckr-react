@@ -2,14 +2,14 @@
 import firebase from 'firebase';
 import { firebaseStorageRef } from '../config/constants';
 
-export const uploadToStorage = (imageSet, userId, flockId) => {
+export const uploadToStorage = (imageSet, userId) => {
   const promise = new Promise((resolve, reject) => {
     let mainImageUrl = null;
     let mainImagePath = null;
 
     // Main image first
     let uploadTask = firebaseStorageRef
-      .child(`uploads/user:${userId}/flock:${flockId}/${imageSet.image.name}`)
+      .child(`uploads/user:${userId}/${imageSet.image.name}`)
       .put(imageSet.image);
     uploadTask.on(
       firebase.storage.TaskEvent.STATE_CHANGED,
@@ -25,7 +25,7 @@ export const uploadToStorage = (imageSet, userId, flockId) => {
         mainImageUrl = uploadTask.snapshot.downloadURL;
         mainImagePath = uploadTask.snapshot.metadata.fullPath;
         uploadTask = firebaseStorageRef
-          .child(`uploads/user:${userId}/flock:${flockId}/${imageSet.thumbnail.name}`)
+          .child(`uploads/user:${userId}/${imageSet.thumbnail.name}`)
           .put(imageSet.thumbnail);
         uploadTask.on(
           firebase.storage.TaskEvent.STATE_CHANGED,

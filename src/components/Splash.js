@@ -20,7 +20,7 @@ const Splash = () => {
   return (
     <div style={loadingStyles}>
       <img src="/assets/icons/android-chrome-192x192.png" alt="" />
-      <p style={pStyles}>Loading Cluckr...</p>
+      <p style={pStyles}>Loading Clucker...</p>
     </div>
   );
 };

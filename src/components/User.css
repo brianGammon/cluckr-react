@@ -5,13 +5,22 @@
   width: 100%;
   min-height: 100vh;
   background-size: cover;
-  background-image: url('/assets/icons/android-chrome-512x512.png');
+  background-image: url('/assets/images/rays.jpg');
   background-repeat: no-repeat;
   background-position: 50% 0;
   -ms-background-size: cover;
   -o-background-size: cover;
   -moz-background-size: cover;
   -webkit-background-size: cover;
+}
+
+.chicken-img {
+  width: 80px;
+  height: 80px;
+}
+
+.tagline {
+ color: grey;
 }
 
 .user-base .form-heading {

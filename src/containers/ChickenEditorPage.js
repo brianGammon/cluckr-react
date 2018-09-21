@@ -52,7 +52,7 @@ class ChickenEditorPage extends Component {
 
   onFormSubmit(values) {
     const { newImageSet, imagesToDelete } = this.state;
-    const { uid, flockId } = this.props;
+    const { uid } = this.props;
     const processNewImage = !!newImageSet.image;
     const removeExistingImage = imagesToDelete.length > 0;
 
@@ -61,7 +61,7 @@ class ChickenEditorPage extends Component {
       : Promise.resolve();
 
     const uploadImages = processNewImage
-      ? uploadToStorage(newImageSet, uid, flockId)
+      ? uploadToStorage(newImageSet, uid)
       : Promise.resolve({});
 
     return deleteImages
@@ -132,12 +132,10 @@ const mapStateToProps = ({
   auth,
   chickens,
   dataLoading,
-  userSettings,
 }, ownProps) => {
   let initialValues = {};
   const state = {
     uid: auth.uid,
-    flockId: userSettings.currentFlockId,
     dataLoading,
   };
   // Only set initial values if data is loaded

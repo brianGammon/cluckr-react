@@ -16,8 +16,15 @@ const UserBase = ({
       <div className="form-background">
         <div className="form-container">
           <div className="form-heading">
-            <p className="title is-3">Cluckr</p>
-            <p className="subtitle is-5 ">Your backyard chicken egg tracker</p>
+            <div className="columns is-gapless is-mobile">
+              <div className="column is-narrow">
+                <img className="chicken-img" src="/assets/images/chicken-sm.png" alt="chicken-logo" />
+              </div>
+              <div className="column">
+                <p className="title is-3">Clucker</p>
+                <p className="tagline subtitle is-5">Your backyard chicken egg tracker</p>
+              </div>
+            </div>
           </div>
           {showTabs &&
             <div className="tabs">

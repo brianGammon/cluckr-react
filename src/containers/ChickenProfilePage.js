@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ChickenProfile from '../components/ChickenProfile';
 import eggsByChickenSelector from '../selectors/eggsByChickenSelector';
-import isFlockOwnerSelector from '../selectors/isFlockOwnerSelector';
 import chickenStatsHelper from '../utils/chickenStatsHelper';
 import './ChickenProfilePage.css';
 
@@ -50,13 +49,10 @@ class ChickenProfilePage extends Component {
 }
 
 const mapStateToProps = ({
-  flocks,
-  userSettings,
   chickens,
   eggs,
 }, props) => ({
   chickens,
-  isFlockOwner: isFlockOwnerSelector({ flocks, userSettings }),
   eggs: eggsByChickenSelector(eggs, props),
 });
 

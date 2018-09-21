@@ -1,21 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ProfileHeader = ({ chickenIds, index, isFlockOwner }) => (
+const ProfileHeader = ({ chickenIds, index }) => (
   <div className="level is-mobile">
     <div className="level-left">
       <div className="level-item">
         <p className="title is-6">Chicken Profile</p>
       </div>
-      {isFlockOwner &&
-        <div className="level-item">
-          <Link className="button is-white" to={`/chicken/edit/${chickenIds[index]}`}>
-            <span className="icon">
-              <i className="fa fa-pencil" />
-            </span>
-          </Link>
-        </div>
-      }
+      <div className="level-item">
+        <Link className="button is-white" to={`/chicken/edit/${chickenIds[index]}`}>
+          <span className="icon">
+            <i className="fa fa-pencil" />
+          </span>
+        </Link>
+      </div>
     </div>
     {chickenIds.length > 1 &&
       <div className="level-right">

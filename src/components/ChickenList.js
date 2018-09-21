@@ -36,16 +36,13 @@ class ChickenList extends Component {
   }
 
   render() {
-    const { chickens, stats, isFlockOwner } = this.props;
+    const { chickens, stats } = this.props;
     const chickenKeys = Object.keys(chickens || {});
     if (chickenKeys.length === 0) {
       return (
         <div className="level is-mobile">
           <div className="level-item">
-            {isFlockOwner
-              ? <em>No chickens in your flock, <Link to="/chicken/add">add one</Link>?</em>
-              : <em>No chickens in the flock yet</em>
-            }
+            <em>No chickens in your flock, <Link to="/chicken/add">add one</Link>?</em>
           </div>
         </div>
       );
@@ -59,7 +56,6 @@ class ChickenList extends Component {
             chicken={chickens[chickenKey]}
             chickenId={chickenKey}
             stats={stats}
-            isFlockOwner={isFlockOwner}
             onDelete={this.showModal}
           />))
         }
@@ -82,7 +78,6 @@ ChickenList.propTypes = {
   // https://github.com/yannickcr/eslint-plugin-react/issues/1389
   // eslint-disable-next-line react/no-typos
   stats: chickenStatsType,
-  isFlockOwner: PropTypes.bool.isRequired,
 };
 ChickenList.defaultProps = {
   chickens: null,

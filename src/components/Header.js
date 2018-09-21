@@ -17,18 +17,16 @@ class Header extends Component {
     this.setState({ show: !this.state.show });
   }
 
-  selectFlock(flockId) {
-    this.props.setCurrentFlock(flockId);
-    this.toggleCollapse();
-  }
-
   doSignOut() {
     this.props.signOutAction();
     this.toggleCollapse();
   }
 
   render() {
-    if (this.props.authStatus !== C.LOGGED_IN) {
+    const { email, authStatus } = this.props;
+    const signedIn = authStatus === C.LOGGED_IN;
+
+    if (!signedIn) {
       return null;
     }
     const dayString = moment().format('DD');
@@ -38,13 +36,13 @@ class Header extends Component {
       <nav className="header navbar is-fixed-top">
         <div className="navbar-brand">
           <Link className="navbar-item logo" to="/flock">
-            <img src="/assets/images/cluckr_small.png" alt="cluckr" />
+            <img src="/assets/icons/android-chrome-192x192.png" alt="clucker" />
           </Link>
           <Link className="navbar-item" to="/flock">
             Clucker
           </Link>
 
-          {this.props.userSettings &&
+          {signedIn &&
             <div
               tabIndex={0}
               role="menuitem"
@@ -59,68 +57,36 @@ class Header extends Component {
         </div>
 
         <div className={`navbar-menu ${(this.state.show ? 'is-active' : '')}`}>
-          {this.props.userSettings &&
+          {signedIn &&
             <div className="navbar-end">
-              {this.props.userSettings.flocks &&
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <div className="navbar-link">
-                    Eggs
-                  </div>
-                  <div className="navbar-dropdown">
-                    <Link
-                      className="navbar-item"
-                      to={`/eggs/day/${monthString}-${dayString}`}
-                      onClick={this.toggleCollapse}
-                    >
-                      <span className="icon">
-                        <i className="fa fa-list" aria-hidden="true" />
-                      </span> By Day
-                    </Link>
-                    <Link className="navbar-item" to={`/eggs/month/${monthString}`} onClick={this.toggleCollapse}>
-                      <span className="icon">
-                        <i className="fa fa-calendar" aria-hidden="true" />
-                      </span> By Month
-                    </Link>
-                  </div>
-                </div>
-              }
-
-              {/* <div className="navbar-item has-dropdown is-hoverable">
+              <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">
-                  My Flocks
+                  Eggs
                 </div>
                 <div className="navbar-dropdown">
-                  {this.props.flocks.map(flock => (
-                    <Link
-                      key={flock.$key}
-                      className="navbar-item"
-                      to="/flock"
-                      onClick={() => this.selectFlock(flock.$key)}
-                    >
-                      {flock.name}
-                      {flock.$key === this.props.userSettings.currentFlockId &&
-                        <span className="icon has-text-success">
-                          <i className="fa fa-check-circle" aria-hidden="true" />
-                        </span>
-                      }
-                    </Link>))
-                  }
-
-                  {this.props.userSettings.flocks && <div className="navbar-divider" />}
-
-                  <Link className="navbar-item" to="/flock-manager" onClick={this.toggleCollapse}>
+                  <Link
+                    className="navbar-item"
+                    to={`/eggs/day/${monthString}-${dayString}`}
+                    onClick={this.toggleCollapse}
+                  >
                     <span className="icon">
-                      <i className="fa fa-gear" aria-hidden="true" />
-                    </span> Manage Flocks
+                      <i className="fa fa-list" aria-hidden="true" />
+                    </span> By Day
+                  </Link>
+                  <Link className="navbar-item" to={`/eggs/month/${monthString}`} onClick={this.toggleCollapse}>
+                    <span className="icon">
+                      <i className="fa fa-calendar" aria-hidden="true" />
+                    </span> By Month
                   </Link>
                 </div>
-              </div> */}
+              </div>
+
               <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">
                   <span className="icon is-hidden-touch">
                     <i className="fa fa-user" aria-hidden="true" />
                   </span>
-                  <span className="is-hidden-desktop">{ this.props.userSettings.displayName }</span>
+                  <span className="is-hidden-desktop">{email}</span>
                 </div>
                 <div className="navbar-dropdown">
                   <div

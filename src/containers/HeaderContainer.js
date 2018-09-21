@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import currentFlockSelector from '../selectors/currentFlockSelector';
-import { signOut, updateUserSettings } from '../actions';
+import { signOut } from '../actions';
 import Header from '../components/Header';
 import './Header.css';
 
@@ -11,14 +10,10 @@ const HeaderContainer = props => (
 );
 
 const mapStateToProps = ({
-  userSettings,
-  flocks,
-  auth: { authStatus },
+  auth: { authStatus, email },
 }) => (
   {
-    currentFlock: currentFlockSelector({ flocks, userSettings }),
-    flocks,
-    userSettings,
+    email,
     authStatus,
   }
 );
@@ -26,7 +21,6 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => {
   return {
     signOutAction: () => dispatch(signOut()),
-    setCurrentFlock: flockId => dispatch(updateUserSettings({ currentFlockId: flockId })),
   };
 };
 

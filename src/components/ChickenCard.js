@@ -7,7 +7,6 @@ const ChickenCard = ({
   chicken,
   chickenId,
   stats,
-  isFlockOwner,
   onDelete,
 }) => {
   const imgUrl = chicken.thumbnailUrl ? chicken.thumbnailUrl : '/assets/images/default-profile-photo_thumb.png';
@@ -45,15 +44,13 @@ const ChickenCard = ({
               }
             </div>
           </div>
-          {isFlockOwner &&
-            <div className="media-right">
-              <button className="button is-white" onClick={() => onDelete({ name: chicken.name, chickenId })}>
-                <span className="icon trash">
-                  <i className="fa fa-trash-o" />
-                </span>
-              </button>
-            </div>
-          }
+          <div className="media-right">
+            <button className="button is-white" onClick={() => onDelete({ name: chicken.name, chickenId })}>
+              <span className="icon trash">
+                <i className="fa fa-trash-o" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -64,7 +61,6 @@ ChickenCard.propTypes = {
   chicken: chickenType.isRequired,
   chickenId: PropTypes.string.isRequired,
   stats: chickenStatsType,
-  isFlockOwner: PropTypes.bool.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
