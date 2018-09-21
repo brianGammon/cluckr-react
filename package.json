@@ -1,6 +1,6 @@
 {
   "name": "clucker-react",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "private": true,
   "dependencies": {
     "blueimp-canvas-to-blob": "^3.14.0",
