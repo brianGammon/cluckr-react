@@ -41,7 +41,7 @@ class Header extends Component {
             <img src="/assets/images/cluckr_small.png" alt="cluckr" />
           </Link>
           <Link className="navbar-item" to="/flock">
-            {this.props.currentFlock ? this.props.currentFlock.name : 'Cluckr'}
+            Clucker
           </Link>
 
           {this.props.userSettings &&
@@ -85,7 +85,7 @@ class Header extends Component {
                 </div>
               }
 
-              <div className="navbar-item has-dropdown is-hoverable">
+              {/* <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">
                   My Flocks
                 </div>
@@ -114,7 +114,7 @@ class Header extends Component {
                     </span> Manage Flocks
                   </Link>
                 </div>
-              </div>
+              </div> */}
               <div className="navbar-item has-dropdown is-hoverable">
                 <div className="navbar-link">
                   <span className="icon is-hidden-touch">

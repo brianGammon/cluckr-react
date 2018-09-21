@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-const MonthSwitcher = ({ eggs, match }) => {
+const MonthSwitcher = ({ count, match }) => {
   const currDate = moment.utc(match.params.date);
   const previousDate = currDate.subtract(1, 'months').format('YYYY-MM').toString();
   const nextDate = currDate.add(2, 'months').format('YYYY-MM').toString();
@@ -33,7 +33,7 @@ const MonthSwitcher = ({ eggs, match }) => {
       <div className="level-item has-text-centered">
         <div>
           <p className="heading">Eggs</p>
-          <p className="title is-4">{ Object.keys(eggs || {}).length }</p>
+          <p className="title is-4">{count}</p>
         </div>
       </div>
     </div>

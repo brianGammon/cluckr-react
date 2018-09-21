@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { eggType } from '../types';
 
-const EggBox = ({ egg, eggId, chickenName, onDelete }) => (
+const EggBox = ({
+  egg, eggId, chickenName, onDelete,
+}) => (
   <div className="box is-radiusless">
     <div className="media">
       <div className="media-left">
@@ -13,25 +15,40 @@ const EggBox = ({ egg, eggId, chickenName, onDelete }) => (
       </div>
       <div className="media-content">
         <div className="columns is-mobile">
-          <div className="column is-four-fifths is-clipped">
-            {egg.chickenId !== 'unknown' &&
-              <Link
-                className="is-size-6"
-                to={`/chicken/${egg.chickenId}`}
-              >
-                { chickenName }
-              </Link>
-            }
-            {egg.chickenId === 'unknown' &&
-              <p className="is-size-6">{ chickenName }</p>
-            }
-            <p className={`is-size-6 ${egg.weight ? '' : 'has-text-grey-light'}`}>
-              { egg.weight ? egg.weight : '-- ' }g
-            </p>
-          </div>
-
+          {!egg.bulkMode &&
+            (
+              <div className="column is-four-fifths is-clipped">
+                {egg.chickenId !== 'unknown' &&
+                  <Link
+                    className="is-size-6"
+                    to={`/chicken/${egg.chickenId}`}
+                  >
+                    { chickenName }
+                  </Link>
+                }
+                {egg.chickenId === 'unknown' &&
+                  <p className="is-size-6">{ chickenName }</p>
+                }
+                <p className={`is-size-6 ${egg.weight ? '' : 'has-text-grey-light'}`}>
+                  Weight: { egg.weight ? egg.weight : '-- ' }g
+                </p>
+              </div>
+            )
+          }
+          {egg.bulkMode &&
+            (
+              <div className="column is-four-fifths is-clipped">
+                {egg.chickenId === 'unknown' &&
+                  <p className="is-size-6">Bulk Entry</p>
+                }
+                <p className="is-size-6">
+                  Quantity: {egg.quantity}
+                </p>
+              </div>
+            )
+          }
           <div className="column edit-icon">
-            <Link className="button is-white is-pulled-right" to={`/eggs/edit/${eggId}`}>
+            <Link disabled={egg.bulkMode} className="button is-white is-pulled-right" to={`/eggs/edit/${eggId}`}>
               <span className="icon">
                 <i className="fa fa-pencil" />
               </span>

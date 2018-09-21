@@ -8,16 +8,22 @@ import EggsHeader from '../components/EggsHeader';
 import eggsByMonthSelector from '../selectors/eggsByMonthSelector';
 import MonthSwitcher from '../components/MonthSwitcher';
 
-const EggsMonthly = ({ eggs, chickens, match, history }) => {
+const EggsMonthly = ({
+  eggs, count, chickens, match, history,
+}) => {
   const handleClick = date => history.push(`/eggs/day/${date}`);
   const handleDayClick = (event, date) => handleClick(date.format('YYYY-MM-DD'));
   const handleEventClick = (event, layout) => handleClick(layout.attributes.range.start.format('YYYY-MM-DD'));
   const currDate = moment.utc(match.params.date);
   const events = [];
   Object.keys(eggs || {}).forEach((id) => {
-    const eggDate = moment.utc(eggs[id].date);
+    const egg = eggs[id];
+    const eggDate = moment.utc(egg.date);
+    const content = egg.bulkMode
+      ? `Bulk (${egg.quantity || 1})`
+      : (chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown';
     const event = {
-      content: (chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown',
+      content,
       range: moment.range(
         eggDate,
         eggDate.clone().add(1, 'hour'),
@@ -29,7 +35,7 @@ const EggsMonthly = ({ eggs, chickens, match, history }) => {
   return (
     <div>
       <EggsHeader title="Eggs By Month" />
-      <MonthSwitcher {...{ eggs, match }} />
+      <MonthSwitcher {...{ count, match }} />
       <Dayz
         display="month"
         date={currDate}
@@ -42,8 +48,14 @@ const EggsMonthly = ({ eggs, chickens, match, history }) => {
 };
 
 const mapStateToProps = (state, props) => {
+  const eggs = eggsByMonthSelector(state, props);
+  let count = 0;
+  Object.keys(eggs || {}).forEach((key) => {
+    count += +eggs[key].quantity || 1;
+  });
   return ({
-    eggs: eggsByMonthSelector(state, props),
+    eggs,
+    count,
     chickens: state.chickens,
   });
 };

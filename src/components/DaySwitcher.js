@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { eggType } from '../types';
 import { dateStringAsMoment, nowAsMoment } from '../utils/dateHelper';
 
-const DaySwitcher = ({ eggs, match }) => {
+const DaySwitcher = ({ count, match }) => {
   const currDate = dateStringAsMoment(match.params.date);
   const previousDate = currDate.clone().subtract(1, 'days');
   const nextDate = currDate.clone().add(1, 'days');
@@ -45,7 +45,7 @@ const DaySwitcher = ({ eggs, match }) => {
       <div className="level-item has-text-centered">
         <div>
           <p className="heading">Eggs</p>
-          <p className="title is-4">{ Object.keys(eggs || {}).length }</p>
+          <p className="title is-4">{count}</p>
         </div>
       </div>
     </div>

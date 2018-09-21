@@ -39,12 +39,14 @@ class EggList extends Component {
     const eggIds = Object.keys(eggs || {});
     return (
       <div className="egg-list">
-        {eggIds.map(id => (
-          <EggBox key={id} egg={eggs[id]} eggId={id} chickenName={(chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown'} onDelete={() => this.showModal(id)} />
-        ))
-        }
+        {eggIds.map((id) => {
+          const chickenName = (chickens[eggs[id].chickenId] && chickens[eggs[id].chickenId].name) || 'Unknown';
+          return (
+            <EggBox key={id} egg={eggs[id]} eggId={id} chickenName={chickenName} onDelete={() => this.showModal(id)} />
+          );
+        })}
         <Dialog showModal={this.state.showModal} onYes={this.handleYes} onNo={this.handleNo}>
-          <p>Are you sure you want to delete this egg?</p>
+          <p>Are you sure you want to delete this entry?</p>
         </Dialog>
       </div>
     );

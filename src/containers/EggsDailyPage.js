@@ -16,19 +16,28 @@ class EggsDaily extends Component {
   }
 
   render() {
+    const {
+      eggs, chickens, deleteEgg, match,
+    } = this.props;
     return (
       <div>
-        <EggsHeader title="Eggs By Day" date={this.props.match.params.date} />
+        <EggsHeader title="Eggs By Day" date={match.params.date} />
         <DaySwitcher {...this.props} />
         <hr />
-        <EggList eggs={this.props.eggs} chickens={this.props.chickens} deleteEgg={this.props.deleteEgg} />
+        <EggList eggs={eggs} chickens={chickens} deleteEgg={deleteEgg} />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, props) => {
+  const eggs = eggsByDateSelector(state, props);
+  let count = 0;
+  Object.keys(eggs || {}).forEach((key) => {
+    count += +eggs[key].quantity || 1;
+  });
   return {
+    count,
     eggs: eggsByDateSelector(state, props),
     chickens: state.chickens,
   };

@@ -3,6 +3,7 @@ import { sortBy, forEach } from 'lodash';
 import { dateStringAsMoment, nowAsMoment } from '../utils/dateHelper';
 
 export default (eggs) => {
+  let totalEggs = 0;
   let heaviestEgg = null;
   let highestWeight = 0;
   let totalWithWeight = 0;
@@ -20,6 +21,8 @@ export default (eggs) => {
 
   sortedEggs.forEach((egg) => {
     const thisEgg = moment(egg.date);
+    const quantity = +egg.quantity || 1;
+    totalEggs += quantity || 1;
 
     if (!earliestDate) {
       earliestDate = egg.date;
@@ -28,7 +31,7 @@ export default (eggs) => {
     if (!eggsPerChicken[egg.chickenId]) {
       eggsPerChicken[egg.chickenId] = 0;
     }
-    eggsPerChicken[egg.chickenId] += 1;
+    eggsPerChicken[egg.chickenId] += quantity;
 
     // Find heaviest & avg
     if (egg.weight) {
@@ -41,7 +44,7 @@ export default (eggs) => {
     }
     // Build a running total for the past 30 days
     if (thisEgg.isAfter(thirtyDaysAgo)) {
-      thirtyDayCount += 1;
+      thirtyDayCount += quantity;
     }
   });
 
@@ -49,7 +52,7 @@ export default (eggs) => {
   let topProducer = '';
   let most = 0;
   forEach(Object.keys(eggsPerChicken), (key) => {
-    if (eggsPerChicken[key] > most) {
+    if (key !== 'unknown' && eggsPerChicken[key] > most) {
       topProducer = key;
       most = eggsPerChicken[key];
     }
@@ -64,7 +67,7 @@ export default (eggs) => {
   const averageNumber = thirtyDayCount > 0 ? thirtyDayCount / daysToGoBack : 0;
 
   return {
-    total: sortedEggs.length,
+    total: totalEggs,
     heaviest: heaviestEgg,
     averageWeight: totalWeight / totalWithWeight,
     averageNumber,
